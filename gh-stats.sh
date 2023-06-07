@@ -216,7 +216,7 @@ fi
 
 function stargazersToCsv {
 condenseAllStargazers
-local outputFile="${STATS_DIR}/${TODAY}/stargazers.csv"
+local outputFile="${STATS_DIR}/${TODAY}/all.stargazers.csv"
 if outputFileExists "${outputFile}"; then
   if [[ ! -z $GH_ECHO ]]; then echo "already created stargazers csv for ${TODAY}: ${outputFile}"; fi
 else
@@ -227,7 +227,8 @@ else
       "${STATS_DIR}/${TODAY}/${REPO}.stargazers.all.json" >> "${outputFile}"
   done
 fi
-sort -k3 -k1 -t "," "${outputFile}" > "${STATS_DIR}/${TODAY}/stargazers.by.repo.csv"
+echo sorting "${outputFile}" to "${STATS_DIR}/${TODAY}/all.stargazers.by.repo.csv"
+sort -k3 -k1 -t "," "${outputFile}" > "${STATS_DIR}/${TODAY}/all.stargazers.by.repo.csv"
 }
 
 function stargazersPerRepo {
