@@ -227,6 +227,7 @@ else
       "${STATS_DIR}/${TODAY}/${REPO}.stargazers.all.json" >> "${outputFile}"
   done
 fi
+sort -k3 -k1 -t "," "${outputFile}" > "${STATS_DIR}/${TODAY}/stargazers.by.repo.csv"
 }
 
 function stargazersPerRepo {

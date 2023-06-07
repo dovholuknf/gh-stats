@@ -25,3 +25,6 @@ At some interval issue a command such as `stargazersPerRepo` which will:
 There are other functions to do 'other things' but really that's what you're probably
 looking for anyway. Who's stargazing your repo and when and who stopped! You can be a
 snoop!
+
+`condenseAllStargazers` might be the one thing you want to run but there's other functions to explore
+`stargazersToCsv` is also useful
