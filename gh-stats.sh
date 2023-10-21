@@ -345,7 +345,7 @@ local repo=$2
 local teamId=$3
 echo "Adding $team with teamId:$teamId to $repo"
 curl -H "Authorization: Token $GH_ADMIN_TOKEN" \
-  -X PUT "https://api.github.com/teams/${teamId}/repos/${ORG}/${repo}"
+  -X PUT -d '{"permission":"push"}' "https://api.github.com/teams/${teamId}/repos/${ORG}/${repo}"
 }
 
 function addTeamToAllRepos {
