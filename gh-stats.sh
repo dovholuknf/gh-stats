@@ -246,7 +246,6 @@ for repo in $(listRepoNames); do
 done
 }
 
-
 function getClones {
 
 curl -s -L \
@@ -331,4 +330,31 @@ fi
 
 function removeTempStargazerFiles {
 find . -name *stargazers.[0123456789].json | xargs rm
+}
+
+function findTeamId {
+local team=$1
+curl -s -H "Authorization: Token $GH_ADMIN_TOKEN" \
+  "https://api.github.com/orgs/${ORG}/teams" \
+  | jq --arg team "$team" '.[] | select(.name==$team) | .id'
+}
+
+function addTeamToRepo {
+local team=$1
+local repo=$2
+local teamId=$3
+echo "Adding $team with teamId:$teamId to $repo"
+curl -H "Authorization: Token $GH_ADMIN_TOKEN" \
+  -X PUT "https://api.github.com/teams/${teamId}/repos/${ORG}/${repo}"
+}
+
+function addTeamToAllRepos {
+  local team=$1
+  local repo=$2
+  local teamId=$(findTeamId $team)
+  for repo in $(listRepoNames)
+  do
+    echo "Adding team:$team to repo:$repo with teamId:$teamId"
+    addTeamToRepo $team $repo $teamId
+  done
 }
