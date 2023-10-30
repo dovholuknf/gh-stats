@@ -28,3 +28,6 @@ snoop!
 
 `condenseAllStargazers` might be the one thing you want to run but there's other functions to explore
 `stargazersToCsv` is also useful
+
+Just run:
+ - stargazersToCsv
